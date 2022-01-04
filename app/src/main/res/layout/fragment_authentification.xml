@@ -4,23 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/co_mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mail" />
-
-    <EditText
-        android:id="@+id/co_mdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pass"
-        android:inputType="textPassword" />
-
     <Button
-        android:id="@+id/co_co"
+        android:id="@+id/co"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Connexion" />
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inscription" />
 
 </LinearLayout>

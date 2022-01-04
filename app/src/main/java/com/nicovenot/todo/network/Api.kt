@@ -1,19 +1,23 @@
 package com.nicovenot.todo.network
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import android.content.Context
+import android.preference.PreferenceManager
 import com.nicovenot.todo.service.TasksWebService
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.nicovenot.todo.authentication.SHARED_PREF_TOKEN_KEY
 import com.nicovenot.todo.service.UserWebService
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
 
 object Api {
-
     // constantes qui serviront à faire les requêtes
-    private const val BASE_URL = "https://android-tasks-api.herokuapp.com/api/"
-    private const val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1NTcsImV4cCI6MTY3MDMzNTUwM30.0UjJiAbl3Q7Xar5qMmWpYufMp0-vGNM_9sra_YWeimk"
-
+    private const val BASE_URL = "https://android-tasks-api.herokuapp.com/api/v1/"
+    public var TOKEN = ""
     // client HTTP
     private val okHttpClient by lazy {
         OkHttpClient.Builder()

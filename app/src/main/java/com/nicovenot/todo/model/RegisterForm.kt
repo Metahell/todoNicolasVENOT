@@ -1,20 +1,19 @@
-package com.nicovenot.todo.authentication
+package com.nicovenot.todo.model
+
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// Data class meant to encapsulate the signup details
-// provided by the user for sending to the API.
 @Serializable
-data class SignUpForm(
+data class RegisterForm(
     @SerialName("firstname")
     val firstname: String,
     @SerialName("lastname")
-    val lastname: String,
+    val name: String,
     @SerialName("email")
     val email: String,
     @SerialName("password")
     val password: String,
     @SerialName("password_confirmation")
-    val passwordConfirmation: String,
+    val password_confirmation: String
 )

@@ -1,12 +1,10 @@
 package com.nicovenot.todo.service
 
-import com.nicovenot.todo.model.UserInfo
+
+import com.nicovenot.todo.model.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
-import com.nicovenot.todo.authentication.LoginForm
-import com.nicovenot.todo.authentication.SignUpForm
-import com.nicovenot.todo.authentication.AuthenticationResponse
 
 interface UserWebService {
     @Multipart
@@ -20,8 +18,8 @@ interface UserWebService {
     suspend fun update(@Body user: UserInfo): Response<UserInfo>
 
     @POST("users/login")
-    suspend fun login(@Body loginDetails: LoginForm): Response<AuthenticationResponse>
+    suspend fun login(@Body user: LoginForm): Response<LoginResponse>
 
     @POST("users/sign_up")
-    suspend fun signUp(@Body signupDetails: SignUpForm): Response<AuthenticationResponse>
+    suspend fun register(@Body user : RegisterForm): Response<RegisterResponse>
 }

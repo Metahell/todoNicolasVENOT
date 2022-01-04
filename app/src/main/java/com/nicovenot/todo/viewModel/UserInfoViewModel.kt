@@ -6,18 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nicovenot.todo.data.TasksRepository
 import com.nicovenot.todo.data.UserInfoRepository
-import com.nicovenot.todo.model.Task
-import com.nicovenot.todo.model.UserInfo
+import com.nicovenot.todo.model.*
 import kotlinx.coroutines.launch
-import com.nicovenot.todo.authentication.LoginForm
-import com.nicovenot.todo.authentication.SignUpForm
-import com.nicovenot.todo.authentication.AuthenticationResponse
 import okhttp3.MultipartBody
 
 class UserInfoViewModel : ViewModel() {
     private val repo = UserInfoRepository();
 
-    var authenticationResponse: AuthenticationResponse? = null;
     suspend fun getInfo(): UserInfo? {
         return repo.getInfo();
     }
@@ -34,15 +29,11 @@ class UserInfoViewModel : ViewModel() {
         }
     }
 
-    fun login(loginDetails: LoginForm) {
-        viewModelScope.launch {
-            authenticationResponse = repo.login(loginDetails)
-        }
+    suspend fun getAccount(u : LoginForm): LoginResponse? {
+        return repo.getAccount(u);
     }
 
-    fun signUp(signupDetails: SignUpForm) {
-        viewModelScope.launch {
-            authenticationResponse = repo.signUp(signupDetails)
-        }
+    suspend fun addAccount(u: RegisterForm): RegisterResponse? {
+        return repo.addAccount(u);
     }
 }

@@ -1,14 +1,10 @@
 package com.nicovenot.todo.data
 
 import android.net.Uri
-import com.nicovenot.todo.model.Task
-import com.nicovenot.todo.model.UserInfo
+import com.nicovenot.todo.model.*
 import com.nicovenot.todo.network.Api
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import com.nicovenot.todo.authentication.LoginForm
-import com.nicovenot.todo.authentication.SignUpForm
-import com.nicovenot.todo.authentication.AuthenticationResponse
 
 class UserInfoRepository {
     private val webService = Api.userWebService
@@ -33,19 +29,14 @@ class UserInfoRepository {
     suspend fun updateData(u: UserInfo) {
         webService.update(u);
     }
-    suspend fun login(loginDetails: LoginForm): AuthenticationResponse? {
-        var response = webService.login(loginDetails);
-        if(response.isSuccessful) {
-            return response.body();
-        }
-        return null;
+
+    suspend fun getAccount(u: LoginForm) : LoginResponse? {
+        val l = webService.login(u);
+        return if (l.isSuccessful) l.body() else null
     }
 
-    suspend fun signUp(signupDetails: SignUpForm): AuthenticationResponse? {
-        var response = webService.signUp(signupDetails);
-        if(response.isSuccessful) {
-            return response.body();
-        }
-        return null;
+    suspend fun addAccount(u: RegisterForm) : RegisterResponse? {
+        val l = webService.register(u);
+        return if (l.isSuccessful) l.body() else null
     }
 }

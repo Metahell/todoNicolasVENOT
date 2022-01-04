@@ -1,71 +1,87 @@
 package com.nicovenot.todo.authentication
 
+
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.nicovenot.todo.MainActivity
 import com.nicovenot.todo.R
+import com.nicovenot.todo.UserInfoActivity
+import com.nicovenot.todo.databinding.FragmentLoginBinding
+import com.nicovenot.todo.model.LoginForm
+import com.nicovenot.todo.model.Task
+import com.nicovenot.todo.network.Api
 import com.nicovenot.todo.viewModel.UserInfoViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import android.content.SharedPreferences
+import android.content.Context.MODE_PRIVATE
 
-// Fragment displayed when the user needs to
-// log in.
+
+
+
+
+
+
+const val SHARED_PREF_TOKEN_KEY = ""
+
 class LoginFragment : Fragment() {
 
-    private val userViewModel = UserInfoViewModel()
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+
+    private var viewModel = UserInfoViewModel();
+    private val formLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Retrieving the input text fields (for email and password).
-        val emailField = view.findViewById<EditText>(R.id.fragment_login_email_field)
-        val passwordField = view.findViewById<EditText>(R.id.fragment_login_password_field)
-
-        // Defining what happens when the login button
-        // is pressed.
-        val loginButton = view.findViewById<Button>(R.id.fragment_login_login_button)
-        loginButton?.setOnClickListener {
-            // Retrieving what the user has filled in the form.
-            val email = emailField?.text.toString()
-            val password = passwordField?.text.toString()
-            // Checking that the user is not sending empty
-            // data before proceeding.
-            if(email != "" && password != "") {
-                // Communicates with the API.
-                userViewModel.login(LoginForm(email, password))
-                // Login failed.
-                if(userViewModel.authenticationResponse == null) {
-                    Toast.makeText(context, "Unknown email - password combination", Toast.LENGTH_LONG).show()
-                }
-                // Login successful.
-                else {
-                    // We add the token sent back by the API
-                    // to shared preferences.
-                    PreferenceManager.getDefaultSharedPreferences(context).edit {
-                        putString("auth_token_key", userViewModel.authenticationResponse?.apiToken)
+        binding.coCo.setOnClickListener {
+            val mail = binding.coMail.text.toString()
+            val mdp = binding.coMdp.text.toString()
+            if (mail.isEmpty() || mdp.isEmpty()) {
+                Toast.makeText(context, "Veuillez bien remplir les champs", Toast.LENGTH_LONG).show()
+            } else {
+                val data = LoginForm(mail, mdp)
+                lifecycleScope.launch() {
+                    val token = viewModel.getAccount(data)
+                    if (token == null) {
+                        Toast.makeText(context, "Erreur de connexion", Toast.LENGTH_LONG).show()
+                    } else {
+                        val editor = activity!!.getSharedPreferences("TOKEN_SHARE", Context.MODE_PRIVATE).edit()
+                        editor.putString("TOKEN", token.token)
+                        editor.apply()
+                        val intent = Intent(activity, MainActivity::class.java)
+                        formLauncher.launch(intent)
                     }
-                    // User logged in! We can redirect to the task list fragment.
-                    findNavController().navigate(R.id.action_loginFragment_to_taskListFragment)
                 }
             }
-            // Incomplete form.
-            else {
-                Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_LONG).show()
-            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Api.TOKEN != "null") {
+            val intent = Intent(activity, MainActivity::class.java)
+            formLauncher.launch(intent)
         }
     }
 
