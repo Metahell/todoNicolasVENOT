@@ -5,20 +5,20 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/co_mail"
+        android:id="@+id/log_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mail" />
 
     <EditText
-        android:id="@+id/co_mdp"
+        android:id="@+id/log_mdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Pass"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/co_co"
+        android:id="@+id/connexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Connexion" />

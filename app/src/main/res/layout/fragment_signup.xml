@@ -5,39 +5,39 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/ins_prename"
+        android:id="@+id/su_fstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="First Name" />
 
     <EditText
-        android:id="@+id/ins_name"
+        android:id="@+id/su_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name" />
 
     <EditText
-        android:id="@+id/ins_mail"
+        android:id="@+id/su_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mail" />
 
     <EditText
-        android:id="@+id/ins_mdp"
+        android:id="@+id/su_mdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Pass"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/ins_mdp_2"
+        android:id="@+id/su_mdp_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Pass 2"
+        android:hint="Confirm Password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/ins_ins"
+        android:id="@+id/su_ins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Inscription" />

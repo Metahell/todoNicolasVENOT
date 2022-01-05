@@ -38,12 +38,12 @@ class SignupFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.insIns.setOnClickListener {
-            val fn = binding.insPrename.text.toString()
-            val n = binding.insName.text.toString()
-            val mail = binding.insMail.text.toString()
-            val mdp = binding.insMdp.text.toString()
-            val mdp2 = binding.insMdp2.text.toString()
+        binding.suIns.setOnClickListener {
+            val fn = binding.suFstname.text.toString()
+            val n = binding.suName.text.toString()
+            val mail = binding.suMail.text.toString()
+            val mdp = binding.suMdp.text.toString()
+            val mdp2 = binding.suMdp2.text.toString()
             if (fn.isEmpty() || n.isEmpty() || mail.isEmpty()|| mdp.isEmpty() || mdp2.isEmpty()) {
                 Toast.makeText(context, "Veuillez bien remplir les champs", Toast.LENGTH_LONG).show()
             } else {

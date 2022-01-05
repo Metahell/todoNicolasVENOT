@@ -62,15 +62,15 @@ class UserInfoActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val info = viewModel.getInfo()
             findViewById<EditText>(R.id.name).setText(info?.lastName);
-            findViewById<EditText>(R.id.prename).setText(info?.firstName);
+            findViewById<EditText>(R.id.fstname).setText(info?.firstName);
             findViewById<EditText>(R.id.mail).setText(info?.email);
         }
 
         findViewById<Button>(R.id.save_data).setOnClickListener {
             val name = findViewById<EditText>(R.id.name).text.toString()
-            val prename = findViewById<EditText>(R.id.prename).text.toString()
+            val fstname = findViewById<EditText>(R.id.fstname).text.toString()
             val email = findViewById<EditText>(R.id.mail).text.toString()
-            viewModel.updateData(UserInfo(email, prename, name))
+            viewModel.updateData(UserInfo(email, fstname, name))
             ok()
         }
     }
@@ -85,12 +85,10 @@ class UserInfoActivity : AppCompatActivity() {
         }
 
     private fun launchAppSettings() {
-        // Cet intent permet d'ouvrir les paramètres de l'app (pour modifier les permissions déjà refusées par ex)
         val intent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.fromParts("package", this.packageName, null)
         )
-        // ici pas besoin de vérifier avant car on vise un écran système:
         startActivity(intent)
     }
 

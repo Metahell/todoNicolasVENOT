@@ -24,10 +24,10 @@
         android:text="Nom" />
 
     <EditText
-        android:id="@+id/prename"
+        android:id="@+id/fstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prename" />
+        android:text="Prenom" />
 
     <EditText
         android:id="@+id/mail"

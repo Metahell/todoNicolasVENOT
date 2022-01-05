@@ -54,9 +54,9 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.coCo.setOnClickListener {
-            val mail = binding.coMail.text.toString()
-            val mdp = binding.coMdp.text.toString()
+        binding.connexion.setOnClickListener {
+            val mail = binding.logMail.text.toString()
+            val mdp = binding.logMdp.text.toString()
             if (mail.isEmpty() || mdp.isEmpty()) {
                 Toast.makeText(context, "Veuillez bien remplir les champs", Toast.LENGTH_LONG).show()
             } else {
