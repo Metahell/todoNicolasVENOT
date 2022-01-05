@@ -113,7 +113,7 @@ class TaskListUserInfoFragment : Fragment() {
             formLauncher.launch(intent)
             return;
         }
-        binding.ImageView.load("https://goo.gl/gEgYUd") {
+        binding.ImageView.load("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png") {
             transformations(CircleCropTransformation())
         }
         // Ici on ne va pas gérer les cas d'erreur donc on force le crash avec "!!"
