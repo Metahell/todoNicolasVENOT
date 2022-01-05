@@ -27,7 +27,7 @@ class TaskListAdapter() : ListAdapter<Task,TaskListAdapter.TaskViewHolder>(Tasks
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(task: Task) {
             itemView.findViewById<TextView>(R.id.task_title).text = task.title
-            itemView.findViewById<TextView>(R.id.task_desc).text = task.description
+            itemView.findViewById<TextView>(R.id.task_description).text = task.description
             itemView.findViewById<ImageButton>(R.id.imageButton).setOnClickListener {
                 onCLickDelete(task);
             }

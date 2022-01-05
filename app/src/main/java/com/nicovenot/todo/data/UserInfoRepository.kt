@@ -12,7 +12,7 @@ class UserInfoRepository {
     private fun convert(bytes: ByteArray): MultipartBody.Part {
         return MultipartBody.Part.createFormData(
             name = "avatar",
-            filename = "temp.jpeg",
+            filename = "temp.jpg",
             body = bytes.toRequestBody()
         )
     }
