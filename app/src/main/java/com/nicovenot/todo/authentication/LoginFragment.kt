@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
             val mail = binding.logMail.text.toString()
             val mdp = binding.logMdp.text.toString()
             if (mail.isEmpty() || mdp.isEmpty()) {
-                Toast.makeText(context, "Veuillez bien remplir les champs", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show()
             } else {
                 val data = LoginForm(mail, mdp)
                 lifecycleScope.launch() {

@@ -1,14 +1,11 @@
 package com.nicovenot.todo.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nicovenot.todo.data.TasksRepository
 import com.nicovenot.todo.data.UserInfoRepository
 import com.nicovenot.todo.model.*
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 
 class UserInfoViewModel : ViewModel() {
     private val repo = UserInfoRepository();
@@ -33,7 +30,7 @@ class UserInfoViewModel : ViewModel() {
         return repo.getAccount(u);
     }
 
-    suspend fun addAccount(u: RegisterForm): RegisterResponse? {
-        return repo.addAccount(u);
+    suspend fun addAccount(u: SignUpForm,c: Context?): SignUpResponse? {
+        return repo.addAccount(u,c);
     }
 }

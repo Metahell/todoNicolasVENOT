@@ -1,6 +1,7 @@
 package com.nicovenot.todo.data
 
-import android.net.Uri
+import android.content.Context
+import android.widget.Toast
 import com.nicovenot.todo.model.*
 import com.nicovenot.todo.network.Api
 import okhttp3.MultipartBody
@@ -35,8 +36,14 @@ class UserInfoRepository {
         return if (l.isSuccessful) l.body() else null
     }
 
-    suspend fun addAccount(u: RegisterForm) : RegisterResponse? {
+    suspend fun addAccount(u: SignUpForm,c: Context?) : SignUpResponse? {
         val l = webService.register(u);
-        return if (l.isSuccessful) l.body() else null
+        if (l.isSuccessful){
+            return l.body()
+        }
+        else {
+            Toast.makeText(c, "La requête n'a pas abouti", Toast.LENGTH_LONG).show()
+            return null
+        }
     }
 }

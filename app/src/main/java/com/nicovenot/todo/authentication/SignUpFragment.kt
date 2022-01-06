@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.nicovenot.todo.MainActivity
 import com.nicovenot.todo.databinding.FragmentSignupBinding
 import com.nicovenot.todo.model.LoginForm
-import com.nicovenot.todo.model.RegisterForm
+import com.nicovenot.todo.model.SignUpForm
 import com.nicovenot.todo.network.Api
 import com.nicovenot.todo.viewModel.UserInfoViewModel
 import kotlinx.coroutines.launch
@@ -45,13 +45,13 @@ class SignupFragment : Fragment() {
             val mdp = binding.suMdp.text.toString()
             val mdp2 = binding.suMdp2.text.toString()
             if (fn.isEmpty() || n.isEmpty() || mail.isEmpty()|| mdp.isEmpty() || mdp2.isEmpty()) {
-                Toast.makeText(context, "Veuillez bien remplir les champs", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show()
             } else {
-                val data = RegisterForm(fn, n, mail, mdp, mdp2)
+                val data = SignUpForm(fn, n, mail, mdp, mdp2)
                 lifecycleScope.launch() {
-                    val token = viewModel.addAccount(data)
+                    val token = viewModel.addAccount(data,context)
                     if (token == null) {
-                        Toast.makeText(context, "Erreur", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Erreur de connexion", Toast.LENGTH_LONG).show()
                     } else {
                         val editor = activity!!.getSharedPreferences("TOKEN_SHARE", Context.MODE_PRIVATE).edit()
                         editor.putString("TOKEN", token.token)
