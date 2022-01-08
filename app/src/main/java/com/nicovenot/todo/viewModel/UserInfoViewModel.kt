@@ -7,29 +7,29 @@ import com.nicovenot.todo.model.*
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel : ViewModel() {
-    private val repo = UserInfoRepository();
+    private val repository = UserInfoRepository();
 
     suspend fun getInfo(): UserInfo? {
-        return repo.getInfo();
+        return repository.getInfo();
     }
 
     fun updateAvatar(bytes: ByteArray) {
         viewModelScope.launch {
-            repo.uploadAvatar(bytes);
+            repository.uploadAvatar(bytes);
         }
     }
 
     fun updateData(user: UserInfo) {
         viewModelScope.launch {
-            repo.updateData(user);
+            repository.updateData(user);
         }
     }
 
     suspend fun getAccount(u : LoginForm): LoginResponse? {
-        return repo.getAccount(u);
+        return repository.getAccount(u);
     }
 
     suspend fun addAccount(u: RegisterForm): RegisterResponse? {
-        return repo.addAccount(u);
+        return repository.addAccount(u);
     }
 }

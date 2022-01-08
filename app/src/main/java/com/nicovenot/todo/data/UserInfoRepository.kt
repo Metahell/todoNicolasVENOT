@@ -29,12 +29,12 @@ class UserInfoRepository {
     }
 
     suspend fun getAccount(u: LoginForm) : LoginResponse? {
-        val l = webService.login(u);
-        return if (l.isSuccessful) l.body() else null
+        val response = webService.login(u);
+        return if (response.isSuccessful) response.body() else null
     }
 
     suspend fun addAccount(u: RegisterForm) : RegisterResponse? {
-        val l = webService.register(u);
-        return if (l.isSuccessful) l.body() else null
+        val response = webService.register(u);
+        return if (response.isSuccessful) response.body() else null
     }
 }

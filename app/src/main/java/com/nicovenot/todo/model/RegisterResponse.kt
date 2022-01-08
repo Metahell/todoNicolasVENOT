@@ -6,7 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RegisterResponse(
     @SerialName("token")
-    val token: String,
-    @SerialName("expire")
-    val expire: String
+    val token: String
 )
