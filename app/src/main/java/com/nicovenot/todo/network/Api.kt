@@ -21,7 +21,7 @@ object Api {
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", TOKEN)
+                    .addHeader("Authorization", "$TOKEN")
                     .build()
                 chain.proceed(newRequest)
             }

@@ -28,12 +28,6 @@ import kotlinx.coroutines.launch
 import android.content.SharedPreferences
 import android.content.Context.MODE_PRIVATE
 
-
-
-
-
-
-
 const val SHARED_PREF_TOKEN_KEY = ""
 
 class LoginFragment : Fragment() {

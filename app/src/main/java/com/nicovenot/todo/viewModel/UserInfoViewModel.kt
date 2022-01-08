@@ -1,6 +1,5 @@
 package com.nicovenot.todo.viewModel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nicovenot.todo.data.UserInfoRepository
@@ -30,7 +29,7 @@ class UserInfoViewModel : ViewModel() {
         return repo.getAccount(u);
     }
 
-    suspend fun addAccount(u: SignUpForm,c: Context?): SignUpResponse? {
-        return repo.addAccount(u,c);
+    suspend fun addAccount(u: RegisterForm): RegisterResponse? {
+        return repo.addAccount(u);
     }
 }
